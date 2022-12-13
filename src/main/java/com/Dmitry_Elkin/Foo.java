@@ -3,6 +3,7 @@ package com.Dmitry_Elkin;
 import java.util.concurrent.CountDownLatch;
 
 public class Foo {
+    CountDownLatch cdlA;
     CountDownLatch cdlB;
     CountDownLatch cdlC;
     private final Object lock1;
@@ -13,9 +14,12 @@ public class Foo {
 
 
 
-    public Foo(CountDownLatch cdlB, CountDownLatch cdlC) {
+    public Foo(CountDownLatch cdlA, CountDownLatch cdlB, CountDownLatch cdlC) {
+        this.cdlA = cdlA;
         this.cdlB = cdlB;
         this.cdlC = cdlC;
+
+        //вопрос - почему все будет лочится на third() если неиспользовать lock1,2,3?
         this.lock1 = new Object();
         this.lock2 = new Object();
         this.lock3 = new Object();
@@ -23,10 +27,17 @@ public class Foo {
 
     public void first (Runnable r){
         synchronized(lock1) {
+            try {
+                cdlA.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("First was called by " + Thread.currentThread().getName());
 
             cdlB.countDown();
             cdlC.countDown();
+            cdlA = new CountDownLatch(1);
+
         }
     }
     public  void second (Runnable r){
@@ -52,6 +63,7 @@ public class Foo {
             }
             System.out.println("Third was called by " + Thread.currentThread().getName());
             cdlC = new CountDownLatch(2);
+            cdlA.countDown();
         }
     }
 

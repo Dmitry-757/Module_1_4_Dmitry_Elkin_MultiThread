@@ -4,10 +4,11 @@ import java.util.concurrent.CountDownLatch;
 
 public class Main {
     public static void main(String[] args) {
+        CountDownLatch latch1 = new CountDownLatch(0);
         CountDownLatch latch2 = new CountDownLatch(1);
         CountDownLatch latch3 = new CountDownLatch(2);
 
-        Foo foo = new Foo(latch2, latch3);
+        Foo foo = new Foo(latch1, latch2, latch3);
 
         System.out.println("Let`s start! ;)");
 
@@ -56,31 +57,5 @@ public class Main {
         System.out.println("t2 started");
         t3.start();
         System.out.println("t3 started");
-    }
-}
-
-
-
-
-
-class MyThread3 implements Runnable{
-    Foo foo;
-    CountDownLatch cdl;
-
-    public MyThread3(Foo foo, CountDownLatch cdl) {
-        this.foo = foo;
-        this.cdl = cdl;
-    }
-    @Override
-    public void run() {
-        for (int i = 0; i < 10; i++) {
-            foo.third(Thread.currentThread());
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 }
