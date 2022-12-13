@@ -22,7 +22,7 @@ public class Main {
 
         Thread t2 =
         new Thread(() -> {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 1000; i++) {
                 foo.second(Thread.currentThread());
                 try {
                     Thread.sleep(1000);
@@ -35,7 +35,7 @@ public class Main {
 
         Thread t3 =
         new Thread(() -> {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 1000; i++) {
                 foo.third(Thread.currentThread());
                 try {
                     Thread.sleep(1000);
@@ -47,7 +47,10 @@ public class Main {
         t3.setName("C");
 
         t1.start();
+        System.out.println("t1 started");
         t2.start();
+        System.out.println("t2 started");
         t3.start();
+        System.out.println("t3 started");
     }
 }
