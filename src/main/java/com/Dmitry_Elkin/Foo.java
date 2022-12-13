@@ -8,8 +8,11 @@ public class Foo {
     CountDownLatch cdlC = new CountDownLatch(2);
 
     public synchronized void first (Runnable r){
-        System.out.println("First");
-        System.out.println(" was called by "+Thread.currentThread().getName());
+        System.out.println("first()");
+        System.out.println("cdlB = "+cdlB.getCount());
+        System.out.println("cdlC = "+cdlC.getCount());
+
+        System.out.println("First was called by "+Thread.currentThread().getName());
         cdlB.countDown();
         cdlC.countDown();
         System.out.println("cdlB = "+cdlB.getCount());
@@ -17,7 +20,7 @@ public class Foo {
         System.out.println("*******************");
     }
     public synchronized void second (Runnable r){
-        System.out.println("second await()");
+        System.out.println("second()");
         System.out.println("cdlB = "+cdlB.getCount());
         System.out.println("cdlC = "+cdlC.getCount());
         try {
@@ -25,9 +28,10 @@ public class Foo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Second");
-        System.out.println(" was called by "+Thread.currentThread().getName());
+        System.out.println("Second was called by "+Thread.currentThread().getName());
         cdlC.countDown();
+        System.out.println("cdlB = "+cdlB.getCount());
+        System.out.println("cdlC = "+cdlC.getCount());
         System.out.println("*******************");
     }
     public synchronized void third (Runnable r){
@@ -49,10 +53,11 @@ public class Foo {
             e.printStackTrace();
         }
 
-        System.out.println("Third");
-        System.out.println(" was called by "+Thread.currentThread().getName());
+        System.out.println("Third was called by "+Thread.currentThread().getName());
 
         cdlC = new CountDownLatch(2);
+        System.out.println("cdlB = "+cdlB.getCount());
+
         System.out.println("*******************");
     }
 
