@@ -2,6 +2,11 @@ package com.Dmitry_Elkin;
 
 import java.util.concurrent.CountDownLatch;
 
+
+/**
+ * simple test of CountDownLatch ;)
+ */
+
 public class cdlTest {
     public static void main(String[] args) {
         CountDownLatch latch = new CountDownLatch(20);
