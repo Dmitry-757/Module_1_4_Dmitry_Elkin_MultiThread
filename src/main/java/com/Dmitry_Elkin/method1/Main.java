@@ -1,4 +1,4 @@
-package com.Dmitry_Elkin;
+package com.Dmitry_Elkin.method1;
 
 import java.util.concurrent.CountDownLatch;
 
