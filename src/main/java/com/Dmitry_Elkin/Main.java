@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         CountDownLatch latch1 = new CountDownLatch(0);
         CountDownLatch latch2 = new CountDownLatch(1);
-        CountDownLatch latch3 = new CountDownLatch(2);
+        CountDownLatch latch3 = new CountDownLatch(1);
 
         Foo foo = new Foo(latch1, latch2, latch3);
 
@@ -43,7 +43,7 @@ public class Main {
             for (int i = 0; i < 10; i++) {
                 foo.third(Thread.currentThread());
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(3200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
