@@ -30,6 +30,7 @@ class Foo {
         System.out.println("second");
     }
     public void third(Runnable r) {
+
         try {
             Thread.currentThread().join();
         } catch (InterruptedException e) {
