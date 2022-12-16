@@ -2,10 +2,10 @@ package com.Dmitry_Elkin.method2;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
+
 
 public class Main {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         Foo foo = new Foo();
 
         CompletableFuture.runAsync(() -> {
@@ -18,9 +18,9 @@ public class Main {
 
         CompletableFuture.runAsync(() -> {
             foo.second(new Thread());
-        }).get();
+        });
 
-
+        Thread.sleep(5000);
 
     }
 }
