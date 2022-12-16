@@ -4,6 +4,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Main {
     public static void main(String[] args) {
+
         CountDownLatch latch1 = new CountDownLatch(0);
         CountDownLatch latch2 = new CountDownLatch(1);
         CountDownLatch latch3 = new CountDownLatch(1);
