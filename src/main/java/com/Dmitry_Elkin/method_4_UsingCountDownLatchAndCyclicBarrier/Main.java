@@ -1,4 +1,4 @@
-package com.Dmitry_Elkin.method4;
+package com.Dmitry_Elkin.method_4_UsingCountDownLatchAndCyclicBarrier;
 
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
@@ -53,7 +53,7 @@ public class Main {
 //            }
 //        }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 40; i++) {
             barrier = new CyclicBarrier(3, new Runnable() {
                 @Override
                 public void run() {

@@ -1,4 +1,4 @@
-package com.Dmitry_Elkin.method2;
+package com.Dmitry_Elkin.method_2_UsingCountDownLatch;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
