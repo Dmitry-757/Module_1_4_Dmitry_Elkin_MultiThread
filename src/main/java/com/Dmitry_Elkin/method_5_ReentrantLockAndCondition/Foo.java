@@ -51,7 +51,7 @@ public class Foo {
                 if (lock2.tryLock()) {
                     try {
                         System.out.println("lock2 is locked by first");
-                        System.out.println("Now it shell call condition2.signal()");
+                        System.out.println("Now it will call the condition2.signal()");
                         condition2.signal();
                     } finally {
                         System.out.println("lock2.unlock()");
@@ -77,6 +77,19 @@ public class Foo {
                 condition2.await();
                 System.out.println("condition2 was reached.");
                 System.out.println("Second was called by " + Thread.currentThread().getName());
+
+                if (lock3.tryLock()) {
+                    try {
+                        System.out.println("lock3 is locked by second()");
+                        System.out.println(Thread.currentThread());
+                        System.out.println("Now it will call the condition1.signal()");
+                        condition3.signal();
+                    } finally {
+                        System.out.println("lock3.unlock()");
+                        lock3.unlock();
+                    }
+                }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
@@ -85,17 +98,6 @@ public class Foo {
             }
 
 
-            if (lock3.tryLock()) {
-                try {
-                    System.out.println("lock3 is locked by second()");
-                    System.out.println(Thread.currentThread());
-                    System.out.println("Now it shell call condition1.signal()");
-                    condition3.signal();
-                } finally {
-                    System.out.println("lock3.unlock()");
-                    lock3.unlock();
-                }
-            }
         }
 
     }
@@ -108,6 +110,19 @@ public class Foo {
                 condition3.await();
                 System.out.println("condition3 was reached.");
                 System.out.println("Third was called by " + Thread.currentThread().getName());
+
+                if (lock1.tryLock()) {
+                    try {
+                        System.out.println("lock1 is locked by third");
+                        System.out.println(Thread.currentThread());
+                        System.out.println("Now it will call the condition2.signal()");
+                        condition1.signal();
+                    } finally {
+                        System.out.println("lock1.unlock()");
+                        lock1.unlock();
+                    }
+                }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
@@ -116,17 +131,6 @@ public class Foo {
             }
 
 
-            if (lock1.tryLock()) {
-                try {
-                    System.out.println("lock1 is locked by third");
-                    System.out.println(Thread.currentThread());
-                    System.out.println("Now it shell call condition2.signal()");
-                    condition1.signal();
-                } finally {
-                    System.out.println("lock1.unlock()");
-                    lock1.unlock();
-                }
-            }
         }
     }
 

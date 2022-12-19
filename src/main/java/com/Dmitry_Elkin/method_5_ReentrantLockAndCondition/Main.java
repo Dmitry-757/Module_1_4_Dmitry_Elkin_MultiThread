@@ -40,7 +40,7 @@ public class Main {
                     System.out.println("***************");
 
                     if (!starterLaunched && foo.getLock1().tryLock()) {
-                        foo.getCondition1().signalAll();
+                        foo.getCondition1().signal();
                         System.out.println("lock1 is locked from Main");
                         System.out.println(Thread.currentThread());
                         System.out.println("Now it shell call condition1.signal() from Main");
