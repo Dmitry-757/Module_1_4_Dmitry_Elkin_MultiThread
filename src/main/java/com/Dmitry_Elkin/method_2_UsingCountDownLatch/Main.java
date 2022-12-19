@@ -8,7 +8,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         Foo foo = new Foo();
 
-        Executor executor = Executors.newFixedThreadPool(6);
+//        Executor executor = Executors.newFixedThreadPool(6);
+        ExecutorService executor = Executors.newFixedThreadPool(6);
 
         for (int i = 0; i < 20; i++) {
 
@@ -39,8 +40,7 @@ public class Main {
 
             Thread.sleep(500);
         }
-
-
+        executor.shutdown();
     }
 }
 
